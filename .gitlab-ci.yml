@@ -1,0 +1,47 @@
+# image: microsoft/dotnet:latest
+image: mcr.microsoft.com/dotnet/sdk:5.0
+
+.tags: &tags
+  tags:
+    - sre
+
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - test
+  - deploy
+  - docker
+
+
+build-job:       # This job runs in the build stage, which runs first.
+  stage: build
+  before_script:
+    - 'dotnet restore'
+  script:
+    - 'dotnet build DummyCDCI --runtime linux-x64 --configuration Release'
+  <<: *tags
+
+test-job:   
+  stage: test
+  script:
+    - 'dotnet test'
+  <<: *tags
+
+deploy-job:
+  stage: deploy
+  script:
+    - 'dotnet publish DummyCDCI --runtime linux-x64 --configuration Release -o app/publish'
+  <<: *tags
+  artifacts:
+    name: "${CI_PROJECT_NAME}-${CI_JOB_STAGE}-${CI_JOB_ID}-release"
+    paths:
+      - app/
+    expire_in: 1 week
+    when: always
+
+docker-build:
+  stage: docker
+  image: docker:dind
+  script:
+    - ls -laR app
+    - docker build -t ${CI_PROJECT_NAME} .
+  <<: *tags
