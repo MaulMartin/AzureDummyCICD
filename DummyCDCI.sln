@@ -9,6 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DummyCDCI.Test", "DummyCDCI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoadGenerator", "LoadGenerator\LoadGenerator.csproj", "{C57F3645-3F44-49C3-813E-DF7A1E11E421}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD85496B-47C8-4D64-A256-23F480819EB2}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\DummyCICD.yml = .github\workflows\DummyCICD.yml
+		.github\workflows\master_dummycicd.yml = .github\workflows\master_dummycicd.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
