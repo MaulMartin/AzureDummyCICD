@@ -7,9 +7,15 @@ namespace LoadGenerator
     {
         public static int AttemptsCount = 10;
         public static int TimeoutSpanSec = 0;
+        public static bool RandomTimeouts = false;
+        public static int BottomLimitRandTimeout = 0;
+        public static int TopLimitRandTimeout = 0;
 
         public static async void GenereateLoad()
         {
+            Console.WriteLine("Start!");
+
+            var rnd = new Random();
             int failCount = 0;
             int succCount = 0;
 
@@ -34,11 +40,18 @@ namespace LoadGenerator
                         failCount++;
                     }
 
-                    Console.WriteLine($"Reques #{i} status: {res.StatusCode}");
+                    Console.WriteLine($"Request #{i} status: {res.StatusCode}");
 
-                    if(TimeoutSpanSec > 0)
+                    if (RandomTimeouts)
                     {
-                        System.Threading.Thread.Sleep(TimeoutSpanSec * 1000);
+                        System.Threading.Thread.Sleep(rnd.Next(BottomLimitRandTimeout, TopLimitRandTimeout) * 1000);
+                    }
+                    else
+                    {
+                        if (TimeoutSpanSec > 0)
+                        {
+                            System.Threading.Thread.Sleep(TimeoutSpanSec * 1000);
+                        }
                     }
                 }
             }

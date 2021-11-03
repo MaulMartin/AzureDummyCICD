@@ -30,7 +30,7 @@ namespace DummyCDCI
                     pattern: "{controller}/{action=Index}/{id?}");
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    await context.Response.WriteAsync("Go to /api/test to begin");
                 });
             });
 
