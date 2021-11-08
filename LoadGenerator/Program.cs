@@ -26,7 +26,7 @@ namespace LoadGenerator
             }
             else
             {
-                Console.Write("Set upper timeout limit (>0): ");
+                Console.Write("Set timeout duration (>0): ");
                 TOSpan = Convert.ToInt32(Console.ReadLine());
             }
 

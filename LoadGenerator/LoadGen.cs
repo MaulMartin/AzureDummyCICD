@@ -7,9 +7,9 @@ namespace LoadGenerator
     {
         public static int AttemptsCount = 10;
         public static int TimeoutSpanSec = 0;
-        public static bool RandomTimeouts = false;
         public static int BottomLimitRandTimeout = 0;
         public static int TopLimitRandTimeout = 0;
+        public static bool RandomTimeouts = false;
 
         public static async void GenereateLoad()
         {
